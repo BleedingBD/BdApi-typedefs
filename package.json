@@ -1,6 +1,6 @@
 {
-    "name": "@types/bandagedbd__bdapi",
-    "version": "0.3.2",
+    "name": "@types/betterdiscord__bdapi",
+    "version": "0.3.3",
     "description": "TypeScript definitions for bdapi",
     "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/bandagedbd__bdapi",
     "license": "MIT",
@@ -9,6 +9,11 @@
             "name": "Ari Seyhun",
             "url": "https://github.com/Acidic9",
             "githubUsername": "Acidic9"
+        },
+        {
+            "name": "Qb",
+            "url": "https://github.com/QbDesu",
+            "githubUsername": "QbDesu"
         }
     ],
     "main": "",
@@ -20,7 +25,6 @@
     },
     "scripts": {},
     "dependencies": {
-        "@types/lodash": "*",
         "@types/react": "*",
         "@types/react-dom": "*"
     },

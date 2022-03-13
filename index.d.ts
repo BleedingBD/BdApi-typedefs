@@ -228,10 +228,31 @@ export interface Patcher{
  * @param timeout Adjusts the time (in ms) the toast should be shown for before disappearing automatically. Default: 3000
  */
 export interface ToastOptions {
-    type?: string | undefined;
+    type?: "" | "info" | "warning" | "warn" | "danger" | "error" | "success" | undefined;
     icon?: boolean | undefined;
     timeout?: number | undefined;
 }
+
+/**
+ * Passed into the `options` paramater of `BdApi#showNotice`
+ * @param type Changes the type of the notice stylistically and semantically. Choices: "", "info", "success", "danger"/"error", "warning"/"warn". Default: ""
+ * @param buttons An array of of objects describing buttons to be added to the notice. Default: []
+ * @param timeout Adjusts the time (in ms) the notice should be shown for before disappearing automatically. If 0 the notice won't disappear automatically. Default: 0
+ */
+export interface NoticeOptions {
+    type?: "" | "info" | "warning" | "warn" | "danger" | "error" | "success" | undefined;
+    buttons?: {
+        label: string;
+        onClick?: (closeFn: ()=>void)=>void;
+    }[];
+    timeout?: number; 
+}
+
+/**
+ * Callback function returned by `BdApi#showNotice`. When called the notice will be closed.
+ * @param immediately Whether the notice should be closed without an animation or not.
+ */
+ export type NoticeCloseFn = (immediately?: boolean) => void;
 
 /**
  * Passed into the `options` paramater of `BdApi#showConfirmationModal`
@@ -530,6 +551,16 @@ declare namespace BdApiModule {
      * @param options.timeout Adjusts the time (in ms) the toast should be shown for before disappearing automatically. Default: 3000
      */
     function showToast(content: string, options?: ToastOptions): void;
+
+    /**
+     * Shows a simple notice banner at the top of the app similar to the streamer mode notice.
+     * @param content The notice.
+     * @param options Options for the notice.
+     * @param options.type Changes the type of the notice stylistically and semantically. Choices: "", "info", "success", "danger"/"error", "warning"/"warn". Default: ""
+     * @param options.buttons An array of of objects describing buttons to be added to the notice. Default: []
+     * @param options.timeout Adjusts the time (in ms) the notice should be shown for before disappearing automatically. If 0 the notice won't disappear automatically. Default: 0
+     */
+    function showNotice(content: string|Node, options?: NoticeOptions): NoticeCloseFn;
 
     /**
      * Wraps a function in a try catch block.
